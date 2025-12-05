@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinguaLab · Plataforma Multilingüe</title>
+
+  <style>
+    :root {
+      --bg: #0e1225;
+      --panel: #171b34;
+      --ink: #eef1ff;
+      --accent: #3ba1ff;
+      --border: #242a4d;
+      --soft: #b9c3ff;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(14, 18, 37, 0.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(6px);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav a.logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a {
+      color: var(--soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    /* Mobile menu */
+    .menu-btn {
+      display: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    @media(max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: var(--panel);
+        padding: 1rem;
+      }
+      nav ul.open {
+        display: flex;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--soft);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      color: var(--soft);
+    }
+    .cta {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.8rem 1.4rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0c0f20;
+      font-weight: 600;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--ink);
+    }
+
+    /* Sections */
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 4rem 1.5rem;
+    }
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.9rem;
+    }
+    p.section-intro {
+      text-align: center;
+      color: var(--soft);
+      max-width: 700px;
+      margin: auto;
+      margin-bottom: 3rem;
+    }
+
+    /* Servicios */
+    .services-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .service-card {
+      background: var(--panel);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .service-card h3 {
+      margin-top: 0;
+    }
+    .tags {
+      margin-top: 0.8rem;
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background: #1f2344;
+      color: var(--soft);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+
+    /* Metodología */
+    .steps {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .step {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .step-number {
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Clientes */
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .logo-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--soft);
+      font-size: 0.85rem;
+    }
+
+    /* FAQ */
+    details {
+      background: var(--panel);
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Contacto */
+    .contact-box {
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* Modal form */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      z-index: 1000;
+    }
+    .modal.open {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--panel);
+      padding: 1rem;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 12px;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .close-btn {
+      text-align: right;
+      margin-bottom: 0.5rem;
+    }
+    .close-btn button {
+      background: transparent;
+      border: none;
+      color: var(--ink);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--soft);
+      font-size: 0.85rem;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <a class="logo" href="#">LinguaLab · Universidad Global Europea</a>
+
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+      <nav>
+        <ul id="menu">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#metodologia">Metodología</a></li>
+          <li><a href="#clientes">Instituciones</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contacto">Registro</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">Plataforma académica · Multilingüe</div>
+
+    <h1>LinguaLab: Prácticas de Idiomas para Estudiantes Internacionales</h1>
+    <p>Un espacio digital diseñado por el equipo LinguaLab para apoyar el aprendizaje de idiomas mediante actividades guiadas, tutorías y retos semanales con enfoque académico y tecnológico.</p>
+
+    <div class="cta">
+      <button class="btn btn-primary" onclick="openModal()">Registrarme</button>
+      <a href="#servicios"><button class="btn btn-secondary">Ver servicios</button></a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <h2 class="section-title">Servicios</h2>
+    <p class="section-intro">Funciones clave de LinguaLab diseñadas para potenciar el aprendizaje autónomo y guiado.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <h3>Sesiones Guiadas Multilingües</h3>
+        <p>Clases breves para practicar habilidades esenciales con acompañamiento académico.</p>
+        <div class="tags"><span class="tag">Conversación</span><span class="tag">Grammar Lab</span></div>
+      </div>
+
+      <div class="service-card">
+        <h3>Retos Semanales</h3>
+        <p>Actividades dinámicas para aplicar el idioma en situaciones reales.</p>
+        <div class="tags"><span class="tag">Challenge</span><span class="tag">Gamificación</span></div>
+      </div>
+
+      <div class="service-card">
+        <h3>Tutorías Personalizadas</h3>
+        <p>Acompañamiento según nivel, ritmo y objetivos del estudiante.</p>
+        <div class="tags"><span class="tag">One-to-one</span><span class="tag">Coaching</span></div>
+      </div>
+
+      <div class="service-card">
+        <h3>Recursos Académicos</h3>
+        <p>Material descargable, guías temáticas y bibliografía selecta.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">Lecturas</span></div>
+      </div>
+
+      <div class="service-card">
+        <h3>Chatbot Inteligente</h3>
+        <p>Asistente con IA que responde dudas usando el contexto del proyecto.</p>
+        <div class="tags"><span class="tag">IA</span><span class="tag">Asistencia</span></div>
+      </div>
+
+      <div class="service-card">
+        <h3>Panel de Progreso</h3>
+        <p>Seguimiento visual del avance y recomendaciones personalizadas.</p>
+        <div class="tags"><span class="tag">Data</span><span class="tag">Tracking</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section id="metodologia">
+    <h2 class="section-title">Metodología</h2>
+    <p class="section-intro">Un proceso simple y directo, centrado en el aprendizaje activo.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <p>Registro y selección de idioma de práctica.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <p>Acceso a guías, materiales y calendario de actividades.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <p>Participación en sesiones, retos y tutorías semanales.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <p>Evaluación del progreso y recomendaciones personalizadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section id="clientes">
+    <h2 class="section-title">Instituciones</h2>
+    <p class="section-intro">LinguaLab colabora con facultades, centros de idiomas y coordinaciones académicas.</p>
+
+    <div class="logos">
+      <div class="logo-box">Logo 1</div>
+      <div class="logo-box">Logo 2</div>
+      <div class="logo-box">Logo 3</div>
+      <div class="logo-box">Logo 4</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2 class="section-title">Preguntas Frecuentes</h2>
+
+    <details>
+      <summary>¿Necesito tener un nivel mínimo para participar?</summary>
+      <p>No. LinguaLab está diseñado para todos los niveles, desde principiante hasta avanzado.</p>
+    </details>
+
+    <details>
+      <summary>¿La participación tiene algún costo?</summary>
+      <p>No, el acceso es gratuito para estudiantes registrados en la institución.</p>
+    </details>
+
+    <details>
+      <summary>¿Qué idiomas están disponibles?</summary>
+      <p>Inicialmente inglés, español y francés. Próximamente se añadirán más.</p>
+    </details>
+
+    <details>
+      <summary>¿Cómo funcionan los retos semanales?</summary>
+      <p>Cada semana se libera un desafío práctico diseñado para aplicar el idioma en un contexto real.</p>
+    </details>
+
+    <details>
+      <summary>¿Puedo recibir constancia de participación?</summary>
+      <p>Sí, según el nivel de asistencia y actividades completadas.</p>
+    </details>
+  </section>
+
+  <!-- CONTACTO / REGISTRO -->
+  <section id="contacto">
+    <h2 class="section-title">Registro</h2>
+    <div class="contact-box">
+      <p>Completa el formulario oficial para unirte a LinguaLab.</p>
+      <button class="btn btn-primary" onclick="openModal()">Abrir formulario</button>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="close-btn"><button onclick="closeModal()">✕</button></div>
+
+      <!-- FORMULARIO ACTUALIZADO -->
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdx--FcIo9tITwIC-oiqtnASaau5DjCK53uCMqK6D_USxU50g/viewform?usp=header"></iframe>
+    </div>
+  </div>
+
+  <footer>
+    LinguaLab · Universidad Global Europea · 2025
+  </footer>
+
+  <script>
+    // Menu móvil
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("open");
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+        toggleMenu();
+      });
+    });
+
+    // Modal
+    function openModal() {
+      document.getElementById("modal").classList.add("open");
+    }
+    function closeModal() {
+      document.getElementById("modal").classList.remove("open");
+    }
+  </script>
+
+</body>
+</html>
